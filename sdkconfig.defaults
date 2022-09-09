@@ -1,0 +1,7 @@
+# Project default configuration
+
+# Espressif IoT Development Framework (ESP-IDF) Project Configuration
+CONFIG_IDF_CMAKE=y
+CONFIG_IDF_TARGET="esp32"
+CONFIG_IDF_TARGET_ESP32=y
+CONFIG_IDF_FIRMWARE_CHIP_ID=0x0000
