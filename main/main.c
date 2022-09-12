@@ -6,9 +6,11 @@
 #include "esp_chip_info.h"
 #include "esp_flash.h"
 
-void app_main(void)
+#include "sensor.h"
+
+void app_main(void) 
 {
-    printf("Hello world!\n");
+    printf("Boot to app_main!\n");
 
     /* Print chip information */
     esp_chip_info_t chip_info;
@@ -35,7 +37,13 @@ void app_main(void)
 
     printf("Minimum free heap size: %" PRIu32 " bytes\n", esp_get_minimum_free_heap_size());
 
-    for (int i = 10; i >= 0; i--) {
+    esp_err_t err = sensor_init();
+
+    while(err == ESP_OK) {
+        err = sensor_read();
+    }
+
+    for (int i = 5; i >= 0; i--) {
         printf("Restarting in %d seconds...\n", i);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
