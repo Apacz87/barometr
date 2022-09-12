@@ -5,6 +5,8 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
+#include "sensor.h"
+
 #ifdef CONFIG_IDF_TARGET_ESP32
 #define CHIP_NAME "ESP32"
 #endif
@@ -30,6 +32,14 @@ void app_main(void)
 
 	printf("%dMB %s flash\n", spi_flash_get_chip_size() / (1024 * 1024),
 		(chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
+	
+	esp_err_t err = sensor_init();
+
+	if (err == ESP_OK) {
+		while(true) {
+			sensor_read();
+		}
+	}
 
 	for (int i = 10; i >= 0; i--) {
 		printf("Restarting in %d seconds...\n", i);
