@@ -1,0 +1,3 @@
+[submodule "components/sensor/bmp280"]
+	path = components/sensor/bmp280
+	url = git@github.com:Apacz87/BMP280_driver.git
